@@ -17,7 +17,8 @@ import tools.jackson.databind.node.ObjectNode;
 
 @Service
 public class OpenRouterService {
-    @Value("${openrouter.api.key}")
+    // Support property, environment variable, or empty default to avoid startup failure during tests
+    @Value("${openrouter.api.key:${OPENROUTER_API_KEY:}}")
     private String apiKey;
 
     private final String url = "https://openrouter.ai/api/v1/chat/completions";
