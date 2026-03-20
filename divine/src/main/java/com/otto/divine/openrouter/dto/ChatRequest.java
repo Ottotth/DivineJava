@@ -1,20 +1,16 @@
-package com.otto.divine.openrouter;
+package com.otto.divine.openrouter.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChatRequest {
     private String prompt;
-
-    public ChatRequest() {
     }
-
-    public ChatRequest(String prompt) {
-        this.prompt = prompt;
-    }
-
-    public String getPrompt() {
-        return prompt;
-    }
-
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-}

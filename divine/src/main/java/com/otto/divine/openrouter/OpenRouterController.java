@@ -1,6 +1,7 @@
 package com.otto.divine.openrouter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.otto.divine.openrouter.dto.ChatRequest;

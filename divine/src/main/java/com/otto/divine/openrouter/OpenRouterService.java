@@ -1,6 +1,7 @@
 package com.otto.divine.openrouter;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,10 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.ObjectNode;
+
 
 @Service
 public class OpenRouterService {
@@ -19,12 +21,15 @@ public class OpenRouterService {
     private String apiKey;
 
     private final String url = "https://openrouter.ai/api/v1/chat/completions";
-    private final RestTemplate rest = new RestTemplate();
-    private final ObjectMapper mapper = new ObjectMapper();
+    
+    @Autowired
+    private RestTemplate rest;
 
+    @Autowired
+    private ObjectMapper mapper;
+    
     public JsonNode twoStageChat(String prompt) {
         try {
-            // 單一請求：user 提問 + 追問（Are you sure? Think carefully.），並啟用 reasoning
             ObjectNode req = mapper.createObjectNode();
             req.put("model", "nvidia/nemotron-3-super-120b-a12b:free");
 
@@ -33,11 +38,6 @@ public class OpenRouterService {
             userMsg.put("role", "user");
             userMsg.put("content", prompt);
             messages.add(userMsg);
-
-            ObjectNode followUp = mapper.createObjectNode();
-            followUp.put("role", "user");
-            followUp.put("content", "Are you sure? Think carefully.");
-            messages.add(followUp);
 
             req.set("messages", messages);
             ObjectNode reasoning = mapper.createObjectNode();
