@@ -1,4 +1,4 @@
-package com.otto.divine.openrouter;
+package com.otto.divine._openrouter;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +22,26 @@ public class OpenRouterService {
     private String apiKey;
 
     private final String url = "https://openrouter.ai/api/v1/chat/completions";
-    
+
     @Autowired
     private RestTemplate rest;
 
     @Autowired
     private ObjectMapper mapper;
 
-    private static final String TAROT_SKILL_SYSTEM_PROMPT = "You are a tarot reading assistant. MUST follow these rules:\n1. Output exactly the specified Markdown template (no extra text, no JSON, no code fences, no internal chain-of-thought or reasoning details). Only the Markdown formatted reading.\n2. All textual content must be in Traditional Chinese.\n3. For any missing field, use null or leave the textual area empty but preserve the template structure.";
-    
-    public JsonNode twoStageChat(String prompt) {
+
+    public JsonNode chat(String prompt , String systemPrompt) {
         try {
             ObjectNode req = mapper.createObjectNode();
             req.put("model", "nvidia/nemotron-3-super-120b-a12b:free");
 
             ArrayNode messages = mapper.createArrayNode();
 
-            // Inject system prompt from tarot-format skill as the first message
             ObjectNode systemMsg = mapper.createObjectNode();
             systemMsg.put("role", "system");
-            systemMsg.put("content", TAROT_SKILL_SYSTEM_PROMPT);
+            systemMsg.put("content", systemPrompt);
             messages.add(systemMsg);
+
 
             ObjectNode userMsg = mapper.createObjectNode();
             userMsg.put("role", "user");
@@ -57,8 +56,10 @@ public class OpenRouterService {
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(apiKey);
             headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> entity = new HttpEntity<>(req.toString(), headers);
-            ResponseEntity<JsonNode> resp = rest.postForEntity(url, entity, JsonNode.class);
+            HttpEntity<String> entity =
+                    new HttpEntity<>(req.toString(), headers);
+            ResponseEntity<JsonNode> resp =
+                    rest.postForEntity(url, entity, JsonNode.class);
 
             return resp.getBody();
         } catch (Exception e) {

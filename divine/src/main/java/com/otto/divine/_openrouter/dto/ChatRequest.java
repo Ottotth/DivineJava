@@ -1,4 +1,4 @@
-package com.otto.divine.openrouter.dto;
+package com.otto.divine._openrouter.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
