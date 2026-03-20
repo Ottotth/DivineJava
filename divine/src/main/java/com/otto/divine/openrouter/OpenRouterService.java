@@ -28,6 +28,8 @@ public class OpenRouterService {
 
     @Autowired
     private ObjectMapper mapper;
+
+    private static final String TAROT_SKILL_SYSTEM_PROMPT = "You are a tarot reading assistant. MUST follow these rules:\n1. Output exactly the specified Markdown template (no extra text, no JSON, no code fences, no internal chain-of-thought or reasoning details). Only the Markdown formatted reading.\n2. All textual content must be in Traditional Chinese.\n3. For any missing field, use null or leave the textual area empty but preserve the template structure.";
     
     public JsonNode twoStageChat(String prompt) {
         try {
@@ -35,6 +37,13 @@ public class OpenRouterService {
             req.put("model", "nvidia/nemotron-3-super-120b-a12b:free");
 
             ArrayNode messages = mapper.createArrayNode();
+
+            // Inject system prompt from tarot-format skill as the first message
+            ObjectNode systemMsg = mapper.createObjectNode();
+            systemMsg.put("role", "system");
+            systemMsg.put("content", TAROT_SKILL_SYSTEM_PROMPT);
+            messages.add(systemMsg);
+
             ObjectNode userMsg = mapper.createObjectNode();
             userMsg.put("role", "user");
             userMsg.put("content", prompt);
