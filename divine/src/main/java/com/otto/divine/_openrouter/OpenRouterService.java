@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import tools.jackson.databind.JsonNode;
+import com.otto.divine._openrouter.dto.OpenRouterResponseDTO;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ArrayNode;
 import tools.jackson.databind.node.ObjectNode;
@@ -30,7 +30,7 @@ public class OpenRouterService {
     private ObjectMapper mapper;
 
 
-    public JsonNode chat(String prompt , String systemPrompt) {
+    public OpenRouterResponseDTO chat(String prompt , String systemPrompt) {
         try {
             ObjectNode req = mapper.createObjectNode();
             req.put("model", "nvidia/nemotron-3-super-120b-a12b:free");
@@ -58,14 +58,14 @@ public class OpenRouterService {
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> entity =
                     new HttpEntity<>(req.toString(), headers);
-            ResponseEntity<JsonNode> resp =
-                    rest.postForEntity(url, entity, JsonNode.class);
+            ResponseEntity<OpenRouterResponseDTO> resp =
+                    rest.postForEntity(url, entity, OpenRouterResponseDTO.class);
 
             return resp.getBody();
         } catch (Exception e) {
             ObjectNode err = mapper.createObjectNode();
             err.put("error", e.getMessage());
-            return err;
+            return null;
         }
     }
 }

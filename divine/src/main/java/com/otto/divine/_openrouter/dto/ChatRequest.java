@@ -13,4 +13,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ChatRequest {
     private String prompt;
+    private String systemPrompt;
     }
