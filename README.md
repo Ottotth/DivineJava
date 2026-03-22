@@ -7,6 +7,11 @@
 
 DivineJava 是一個以 Java 21 與 Spring Boot 開發的AI命理占卜 CLI/REST 應用，支援多種占卜方式，並可根據用戶需求自動格式化回應。
 
+
+## 技術亮點
+
+- 串接 AI API（如 OpenRouter、GPT 等）自動生成占卜解讀
+
 ## 主要功能
 
 - 支援多種占卜（塔羅、雷諾曼卡、易經卦象）

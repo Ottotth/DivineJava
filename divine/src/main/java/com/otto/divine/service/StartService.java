@@ -46,6 +46,7 @@ public class StartService {
         break;
       case "3":
         System.out.println("Goodbye!");
+        System.exit(0);
         break;
       default:
         System.out.println("Invalid command, defaulting to English.");
@@ -89,6 +90,7 @@ public class StartService {
           break;
         case "0":
           System.out.println("Goodbye!");
+          System.exit(0);
           break;
         default:
           System.out.println("Invalid command, defaulting to General.");
@@ -130,6 +132,7 @@ public class StartService {
           break;
         case "0":
           System.out.println("再見！");
+          System.exit(0);
           break;
         default:
           System.out.println("無效的指令，預設為綜合。");
@@ -188,6 +191,7 @@ public class StartService {
         case "0":
           System.out.println("Goodbye!");
           sc.close();
+          System.exit(0);
           break;
         default:
           System.out.println("Invalid command, select again.");
@@ -241,6 +245,7 @@ public class StartService {
         case "0":
           System.out.println("再見！");
           sc.close();
+          System.exit(0);
           break;
         default:
           System.out.println("無效的指令，請重新選擇。");
