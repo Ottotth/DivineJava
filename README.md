@@ -1,7 +1,7 @@
 
 # DivineJava
 
-![Divination Eye](images/eye.png)
+![Divination Eye](img/Title.png)
 
 ## 專案簡介
 
