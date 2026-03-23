@@ -18,7 +18,7 @@ public class OpenRouterController {
     @PostMapping(value = "/chat")
     public OpenRouterResponseDTO chat(@RequestBody ChatRequest body) {
         try {
-            OpenRouterResponseDTO json = service.chat(body.getPrompt(), body.getSystemPrompt());
+            OpenRouterResponseDTO json = service.chat(body.getPrompt(), body.getSystemPrompt() , body.getApiKey());
             return json;
         } catch (Exception e) {
             e.printStackTrace();

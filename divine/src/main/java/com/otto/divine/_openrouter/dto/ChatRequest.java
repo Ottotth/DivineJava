@@ -14,4 +14,5 @@ import lombok.Setter;
 public class ChatRequest {
     private String prompt;
     private String systemPrompt;
+    private String apiKey;
     }

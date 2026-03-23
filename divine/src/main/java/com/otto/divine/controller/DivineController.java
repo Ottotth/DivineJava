@@ -16,23 +16,23 @@ public class DivineController {
 private DivineService divineService;
 
 @GetMapping("/tarot")
-public OpenRouterResponseDTO tarot(String lan ,String about) {
-    return divineService.torotThreeCards(lan , about);
+public OpenRouterResponseDTO tarot(@RequestParam String lan ,@RequestParam String about , @RequestParam String apiKey) {
+    return divineService.torotThreeCards(lan , about, apiKey);
 }
 
 @GetMapping("/plum")
-public OpenRouterResponseDTO plum(@RequestParam String lan, @RequestParam String about) {
-    return divineService.plum(lan, about);
+public OpenRouterResponseDTO plum(@RequestParam String lan, @RequestParam String about, @RequestParam String apiKey) {
+    return divineService.plum(lan, about, apiKey);
 }
 
 @GetMapping("/lenormand")
-public OpenRouterResponseDTO lenormand(@RequestParam String lan, @RequestParam String about) {
-    return divineService.lenormand(lan, about);
+public OpenRouterResponseDTO lenormand(@RequestParam String lan, @RequestParam String about, @RequestParam String apiKey) {
+    return divineService.lenormand(lan, about, apiKey);
 }
 
 @GetMapping("/coin")
-public OpenRouterResponseDTO coin(@RequestParam String lan, @RequestParam String about) {
-    return divineService.coin(lan, about);
+public OpenRouterResponseDTO coin(@RequestParam String lan, @RequestParam String about, @RequestParam String apiKey) {
+    return divineService.coin(lan, about, apiKey);
 }
 
 

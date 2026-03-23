@@ -2,7 +2,6 @@ package com.otto.divine._openrouter;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,10 +16,7 @@ import tools.jackson.databind.node.ObjectNode;
 
 @Service
 public class OpenRouterService {
-    // Support property, environment variable, or empty default to avoid startup failure during tests
-    @Value("${openrouter.api.key:${OPENROUTER_API_KEY:}}")
-    private String apiKey;
-
+    
     private final String url = "https://openrouter.ai/api/v1/chat/completions";
 
     @Autowired
@@ -30,7 +26,7 @@ public class OpenRouterService {
     private ObjectMapper mapper;
 
 
-    public OpenRouterResponseDTO chat(String prompt , String systemPrompt) {
+    public OpenRouterResponseDTO chat(String prompt , String systemPrompt, String apiKey) {
         try {
             ObjectNode req = mapper.createObjectNode();
             req.put("model", "nvidia/nemotron-3-super-120b-a12b:free");

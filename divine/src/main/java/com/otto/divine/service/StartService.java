@@ -21,11 +21,30 @@ public class StartService {
 
   private AboutEnum about;
 
+  private String apiKey;
+
   private static final Scanner sc = new Scanner(System.in);
 
   public void start() {
     asii.title();
+    apiKey();
+  }
 
+  public void apiKey() {
+    System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+    System.out.println("You can get your API Key from OpenRouter: https://openrouter.ai/");
+    System.out.println("Please Enter Your API Key / 請輸入您的 API 金鑰:");
+    apiKey = sc.next();
+    if (apiKey.isBlank()) {
+      System.out.println("API Key cannot be empty. Please try again.");
+      start();
+    } else {
+      // You can add additional validation for the API key format here if needed
+      lan();
+    }
+  }
+
+  public void lan() {
     System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
     System.out.println("Please Select Language / 請選擇語言:");
     System.out.println("1. English");
@@ -99,7 +118,9 @@ public class StartService {
       }
 
     } else {
-      System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+
+      System.out
+          .println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
       System.out.println("請選擇你想占卜的內容:");
       System.out.println("1. 愛情");
       System.out.println("2. 事業");
@@ -144,7 +165,8 @@ public class StartService {
 
   public void divineMethod() {
     if (lan == LanEnum.English) {
-      System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+      System.out
+          .println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
       System.out.println("You have selected English.");
       System.out.println("Select your method");
       System.out.println("1. Tarot");
@@ -160,28 +182,28 @@ public class StartService {
         case "1":
           asii.loading();
           System.out
-              .println(controller.tarot(lan.getTranslation(), about.getabout())
+              .println(controller.tarot(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "2":
           asii.loading();
           System.out.println(
-              controller.lenormand(lan.getTranslation(), about.getabout())
+              controller.lenormand(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "3":
           asii.loading();
           System.out
-              .println(controller.plum(lan.getTranslation(), about.getabout())
+              .println(controller.plum(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "4":
           asii.loading();
           System.out
-              .println(controller.coin(lan.getTranslation(), about.getabout())
+              .println(controller.coin(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
@@ -198,7 +220,8 @@ public class StartService {
           divineMethod();
       }
     } else {
-      System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+      System.out
+          .println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
 
       System.out.println("請選擇你的占卜方法");
       System.out.println("1. 塔羅牌");
@@ -214,28 +237,28 @@ public class StartService {
         case "1":
           asii.loading();
           System.out
-              .println(controller.tarot(lan.getTranslation(), about.getabout())
+              .println(controller.tarot(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "2":
           asii.loading();
           System.out.println(
-              controller.lenormand(lan.getTranslation(), about.getabout())
+              controller.lenormand(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "3":
           asii.loading();
           System.out
-              .println(controller.plum(lan.getTranslation(), about.getabout())
+              .println(controller.plum(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
         case "4":
           asii.loading();
           System.out
-              .println(controller.coin(lan.getTranslation(), about.getabout())
+              .println(controller.coin(lan.getTranslation(), about.getabout(), apiKey)
                   .getChoices().get(0).getMessage().getContent());
           back();
           break;
@@ -254,9 +277,11 @@ public class StartService {
     }
   }
 
+
   public void back() {
     if (lan == LanEnum.English) {
-      System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+      System.out
+          .println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
       System.out.println("1. Back to select your question");
       System.out.println("2. Back to select method");
       System.out.println(" ");
@@ -280,7 +305,8 @@ public class StartService {
           break;
       }
     } else {
-      System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+      System.out
+          .println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
       System.out.println("1. 返回選擇你想占卜的內容");
       System.out.println("2. 返回選擇占卜方法");
       System.out.println(" ");

@@ -16,6 +16,10 @@ DivineJava 是一個以 Java 21 與 Spring Boot 開發的AI命理占卜 CLI/REST
 - CLI 互動式選單與 RESTful API
 - Skill 檔案自定義占卜模板
 
+## Get API KEY From OpenRouter
+- https://openrouter.ai/
+- 進入網站後申請免費API複製
+
 ## 安裝與執行
 
 1. 下載專案並安裝 Java 21
@@ -32,7 +36,6 @@ DivineJava 是一個以 Java 21 與 Spring Boot 開發的AI命理占卜 CLI/REST
 	```bash
 	mvn spring-boot:run
 	```
-
 (之後打算輸出為程式格式)
 
 ## Skill 檔案範例
