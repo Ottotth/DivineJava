@@ -4,9 +4,10 @@ public enum AboutEnum {
   LOVE("Love"),
   CAREER("Career"),
   HEALTH("Health"),
+  CUSTOM("Custom"),
   ALL("總結");
 
-  private final String translation;
+  private String translation;
 
   AboutEnum(String translation) {
     this.translation = translation;
@@ -14,5 +15,9 @@ public enum AboutEnum {
 
   public String getabout() {
     return translation;
+  }
+
+  public void setabout(String translation) {
+    this.translation = translation;
   }
 }

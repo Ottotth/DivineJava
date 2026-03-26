@@ -2,6 +2,7 @@ package com.otto.divine.service;
 
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.otto.divine.config.Asii;
 import com.otto.divine.controller.DivineController;
@@ -21,6 +22,7 @@ public class StartService {
 
   private AboutEnum about;
 
+  @Value("${apiKey}")
   private String apiKey;
 
   private static final Scanner sc = new Scanner(System.in);
@@ -34,15 +36,14 @@ public class StartService {
     System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
     System.out.println("You can get your API Key from OpenRouter: https://openrouter.ai/");
     System.out.println("Please Enter Your API Key / 請輸入您的 API 金鑰:");
-    apiKey = sc.next();
-    if (apiKey.isBlank()) {
-      System.out.println("API Key cannot be empty. Please try again.");
-      start();
-    } else {
-      // You can add additional validation for the API key format here if needed
-      lan();
+    System.out.println("If you want to use the default API Key, just press Enter.\n如果您想使用預設的 API 金鑰，請直接按 Enter。 (but it might be slow/notwork because of the free tier)");
+    String apiKeyInput = sc.nextLine();
+    if (apiKeyInput != null && !apiKeyInput.isBlank()) {
+      apiKey = apiKeyInput; // Use the provided API key; otherwise keep default from application.properties
     }
-  }
+    lan();
+    }
+  
 
   public void lan() {
     System.out.println("\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
@@ -82,6 +83,7 @@ public class StartService {
       System.out.println("2. Career");
       System.out.println("3. Health");
       System.out.println("4. General");
+      System.out.println("5. Custom");
       System.out.println(" ");
       System.out.println("9. Back");
       System.out.println("0. Exit");
@@ -103,6 +105,9 @@ public class StartService {
         case "4":
           about = AboutEnum.ALL;
           divineMethod();
+          break;
+        case "5":
+          selectCustom();
           break;
         case "9":
           start();
@@ -126,6 +131,7 @@ public class StartService {
       System.out.println("2. 事業");
       System.out.println("3. 健康");
       System.out.println("4. 綜合");
+      System.out.println("5. 自訂");
       System.out.println(" ");
       System.out.println("9. 返回");
       System.out.println("0. 離開");
@@ -148,6 +154,9 @@ public class StartService {
           about = AboutEnum.ALL;
           divineMethod();
           break;
+        case "5":
+          selectCustom();
+          break;
         case "9":
           start();
           break;
@@ -160,6 +169,30 @@ public class StartService {
           about = AboutEnum.ALL;
           divineMethod();
       }
+    }
+  }
+
+  public void selectCustom() {
+    if (lan == LanEnum.English) {
+      System.out.println("Please enter your custom question:");
+      System.out.println(" ");
+      String customQuestion = sc.nextLine();
+      if (customQuestion == null || customQuestion.isBlank()) {
+        customQuestion = sc.nextLine();
+      }
+      about = AboutEnum.CUSTOM;
+      about.setabout(customQuestion);
+      divineMethod();
+    } else {
+      System.out.println("請輸入你的自訂問題:");
+      System.out.println(" ");
+      String customQuestion = sc.nextLine();
+      if (customQuestion == null || customQuestion.isBlank()) {
+        customQuestion = sc.nextLine();
+      }
+      about = AboutEnum.CUSTOM;
+      about.setabout(customQuestion);
+      divineMethod();
     }
   }
 

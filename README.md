@@ -22,6 +22,11 @@ DivineJava 是一個以 Java 21 與 Spring Boot 開發的AI命理占卜 CLI/REST
 
 ## 安裝與執行
 
+Dowload .app for Mac
+https://drive.google.com/file/d/1gerDyFTklgeLjIB6d2V_gCcFyvJomi1k/view?usp=sharing
+
+or
+
 1. 下載專案並安裝 Java 21
 2. 編譯專案：
 	```bash
